@@ -28,16 +28,13 @@ CMD ["/usr/bin/supervisord"]
 
 ### Usage
 
-I personally like to split my ssh keys out of the main container to make updates and management easier. To achieve this I create a persistent storage container;
-
-`docker run -d -v /home/borg/.ssh --name borg-keys-storage busybox:latest`
-
 * Container Creation:
 ```
 docker create \
   --name=borg-server \
   --restart=always \
-  --volumes-from borg-keys-storage \
+  -v borg-keys:/home/borg/.ssh \
+  -v ssh-host-keys:/etc/ssh \
   -v path/to/backups:/backups \
   -p 2022:22 \
   ebrithil/borg-server
