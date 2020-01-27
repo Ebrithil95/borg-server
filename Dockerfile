@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER b3vis
+
 #Install Borg & SSH
 RUN apk add openssh sshfs borgbackup supervisor --no-cache
 RUN adduser -D -u 1000 borg && \

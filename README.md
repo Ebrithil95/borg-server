@@ -3,14 +3,14 @@
 
 ### Description
 
-My take on a Borgbackup Server as a Docker container to faciliate the backing up of remote machines using [Borgbackup](https://github.com/borgbackup)
+A Borgbackup Server as a Docker container to faciliate the backing up of remote machines using [Borgbackup](https://github.com/borgbackup)
 
 ### Dockerfile
 ```
 FROM alpine:latest
-MAINTAINER b3vis
+
 #Install Borg & SSH
-RUN apk add openssh sshfs borgbackup supervisor --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/
+RUN apk add openssh sshfs borgbackup supervisor --no-cache
 RUN adduser -D -u 1000 borg && \
     ssh-keygen -A && \
     mkdir /backups && \
@@ -40,7 +40,7 @@ docker create \
   --volumes-from borg-keys-storage \
   -v path/to/backups:/backups \
   -p 2022:22 \
-  b3vis/borg-server
+  ebrithil/borg-server
 ```
 
 ### Note
