@@ -33,8 +33,8 @@ CMD ["/usr/bin/supervisord"]
 docker create \
   --name=borg-server \
   --restart=always \
-  -v borg-keys:/home/borg/.ssh \
   -v ssh-host-keys:/etc/ssh \
+  -v path/to/config/authorized_keys:/home/borg/.ssh/authorized_keys \
   -v path/to/backups:/backups \
   -p 2022:22 \
   ebrithil/borg-server
